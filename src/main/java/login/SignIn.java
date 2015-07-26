@@ -75,11 +75,11 @@ public class SignIn extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter("inputUsername");
-        username = "asdfyoyoyyoyo";
+        
         //System.out.println(book);
         //int chapter = Integer.parseInt(request.getParameter("txtChapter"));
         //int verse = Integer.parseInt(request.getParameter("txtVerse"));
-        request.setAttribute("username", username);
+        request.setAttribute("username", username + "df");
         request.getRequestDispatcher("newPost.jsp").forward(request, response);
     }
 
