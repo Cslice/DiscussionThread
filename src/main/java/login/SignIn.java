@@ -74,13 +74,23 @@ public class SignIn extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+                ValidateLogin temp = new ValidateLogin();
+
         String username = request.getParameter("inputUsername");
+        String password = request.getParameter("inputPassword");
         
-        //System.out.println(book);
-        //int chapter = Integer.parseInt(request.getParameter("txtChapter"));
-        //int verse = Integer.parseInt(request.getParameter("txtVerse"));
-        request.setAttribute("username", username + "d ");
-        request.getRequestDispatcher("newPost.jsp").forward(request, response);
+            
+       
+        
+        if(temp.validate(username, password))
+        {
+            request.setAttribute("username", username);
+            request.getRequestDispatcher("newPost.jsp").forward(request, response);
+        }
+        else
+        {     
+            response.sendRedirect("invalidLogin.html");
+        }
     }
 
     /**
