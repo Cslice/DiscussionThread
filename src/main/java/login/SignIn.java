@@ -79,7 +79,7 @@ public class SignIn extends HttpServlet {
         //System.out.println(book);
         //int chapter = Integer.parseInt(request.getParameter("txtChapter"));
         //int verse = Integer.parseInt(request.getParameter("txtVerse"));
-        request.setAttribute("username", username + "d");
+        request.setAttribute("username", username + "d ");
         request.getRequestDispatcher("newPost.jsp").forward(request, response);
     }
 
