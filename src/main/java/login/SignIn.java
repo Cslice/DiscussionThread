@@ -78,10 +78,7 @@ public class SignIn extends HttpServlet {
 
         String username = request.getParameter("inputUsername");
         String password = request.getParameter("inputPassword");
-        
-            
-       
-        
+          
         if(temp.validate(username, password))
         {
             request.setAttribute("username", username);

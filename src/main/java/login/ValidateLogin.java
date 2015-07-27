@@ -28,11 +28,13 @@ public class ValidateLogin {
     public boolean validate(String username, String password) 
     {
         boolean validLogin = false;
+        new WriteOpenShiftUserFile().writeFileToOpenshift("userData.json");
+        
         JSONParser parser = new JSONParser();
 
         try 
         {
-            Object obj = parser.parse(new FileReader("userData.json"));
+            Object obj = parser.parse(new FileReader(System.getenv("OPENSHIFT_DATA_DIR") + "userData.json"));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray userArray = (JSONArray)jsonObject.get("users");
             JSONObject jsonUser;
@@ -65,19 +67,4 @@ public class ValidateLogin {
        
         return validLogin;
     }   
-    
-    public void writeTestFile(String fileName, String testData)
-    {
-        Writer writer = null;
-        try {
-            writer = new BufferedWriter(new OutputStreamWriter(
-                  new FileOutputStream(fileName), "utf-8"));
-            writer.write(testData);
-        } catch (IOException ex) {
-          // report
-        } finally {
-           try {writer.close();} catch (Exception ex) {/*ignore*/}
-        }
-        
-    }
 }
