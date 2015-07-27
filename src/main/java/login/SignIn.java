@@ -73,8 +73,8 @@ public class SignIn extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-                ValidateLogin temp = new ValidateLogin();
+            throws ServletException, IOException {            
+        ValidateLogin temp = new ValidateLogin();
 
         String username = request.getParameter("inputUsername");
         String password = request.getParameter("inputPassword");
@@ -82,7 +82,7 @@ public class SignIn extends HttpServlet {
         if(temp.validate(username, password))
         {
             request.setAttribute("username", username);
-            request.getRequestDispatcher("newPost.jsp").forward(request, response);
+            request.getRequestDispatcher("discussionBoardHomepage.jsp").forward(request, response);
         }
         else
         {     
