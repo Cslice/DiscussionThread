@@ -4,27 +4,22 @@
  * and open the template in the editor.
  */
 
-package login;
+package posts;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import posts.GetThreadsAndPosts;
 
 /**
  *
  * @author cameronthomas
  */
-
-@WebServlet(name = "SignIn", urlPatterns = {"/SignIn"})
-public class SignIn extends HttpServlet {
+@WebServlet(name = "CreateThread", urlPatterns = {"/CreateThread"})
+public class CreateThread extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +38,10 @@ public class SignIn extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SignIn</title>");            
+            out.println("<title>Servlet CreateThread</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SignIn at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CreateThread at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -77,25 +72,8 @@ public class SignIn extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {            
-        ValidateLogin temp = new ValidateLogin();
-
-        String username = request.getParameter("inputUsername");
-        String password = request.getParameter("inputPassword");
-          
-        if(temp.validate(username, password))
-        {
-            GetThreadsAndPosts temp1 = new GetThreadsAndPosts();
-            
-            ArrayList<ArrayList<String>> threadList = temp1.getThreadsArray("test");
-            
-            request.setAttribute("threadList", threadList);
-            request.getRequestDispatcher("discussionBoardHomepage.jsp").forward(request, response);       
-        }
-        else
-        {     
-            response.sendRedirect("invalidLogin.html");
-        }
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**
@@ -108,4 +86,4 @@ public class SignIn extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-};
+}

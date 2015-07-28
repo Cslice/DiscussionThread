@@ -68,14 +68,16 @@
       <div class="jumbotron">
         <h1>Discussion Name</h1>
         <div class="list-group">
-            <a href="#" class="list-group-item">
-              Cras justo odio
-            </a>
-            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-            <a href="#" class="list-group-item">Morbi leo risus</a>
-            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-            <a href="#" class="list-group-item">Vestibulum at eros</a>
+            <a href="CreateThreadsPage?threadName=test" class="list-group-item">Test</a>
         </div>
+        
+        <c:forEach var="thread" items="${threadList}">
+            
+                <a href="http://www.espn.com" class="list-group-item">
+                    <strong>${thread[0]} ${thread[1]} ${thread[2]} ${thread[3]}</strong>
+                </a>
+            
+        </c:forEach>
         
         <br />
         <div class="form-group">
