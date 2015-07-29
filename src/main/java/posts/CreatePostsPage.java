@@ -28,7 +28,7 @@ public class CreatePostsPage {
                 "&username=" + username + "\">"
                 + "<button type=\"button\" class=\"btn btn-danger\">Delete All Posts For Thread</button>"
                 + "</a>";
-        String noPostsLabel = "<h3>No Threads On Page</h3>";
+        String noPostsLabel = "<h3>No Posts For Thread</h3>";
         
         ArrayList<ArrayList<String>> postList = new GetThreadsAndPosts().getPostArray(threadName);
         

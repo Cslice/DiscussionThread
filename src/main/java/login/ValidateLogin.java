@@ -22,7 +22,8 @@ public class ValidateLogin {
         JSONObject jsonObject = (JSONObject) obj;
         JSONArray userArray = (JSONArray)jsonObject.get("users");
         JSONObject jsonUser;
-                   
+          
+        // Loop through users to see if username and password are valid
         for(Object user: userArray)
         {
             jsonUser = (JSONObject)user;
