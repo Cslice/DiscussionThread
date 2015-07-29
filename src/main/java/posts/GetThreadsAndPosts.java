@@ -22,7 +22,7 @@ public class GetThreadsAndPosts {
         ArrayList<ArrayList<String>> threadsArray = new ArrayList<ArrayList<String>>();
         ArrayList<String> tempList = null;
         
-        Object obj = new FileIO().readFile("threads.json");
+        Object obj = new FileIO().readFile(threadName + ".json");
         
         // Thread file exist
         if(obj != null)
@@ -75,11 +75,7 @@ public class GetThreadsAndPosts {
                 tempList.add(jsonPost.get("creator").toString());
                 tempList.add(jsonPost.get("dateCreated").toString());
                 postsArray.add(tempList);   
-                
-                //System.out.println(tempList);
             }
-            
-            //System.out.println(postsArray.toString());
         }
         else
             postsArray = null;

@@ -23,12 +23,32 @@ public class CreatePostsPage {
     {
         String threadName = request.getParameter("threadName");
         String username = request.getParameter("username");
+        
+        String deletePostsButtonHtml = "<a href=\"DeletePosts?threadName=" + threadName +
+                "&username=" + username + "\">"
+                + "<button type=\"button\" class=\"btn btn-danger\">Delete All Posts For Thread</button>"
+                + "</a>";
+        String noPostsLabel = "<h3>No Threads On Page</h3>";
+        
         ArrayList<ArrayList<String>> postList = new GetThreadsAndPosts().getPostArray(threadName);
+        
+        if(postList != null)
+        {
+            request.setAttribute("deleteButton", deletePostsButtonHtml);
+            request.setAttribute("noPostsLabel", "");
+
+        }
+        else
+        {
+            request.setAttribute("deleteButton", "");
+            request.setAttribute("noPostsLabel", noPostsLabel);
+
+        }
 
         request.setAttribute("threadName", threadName);
         request.setAttribute("postList", postList);
         request.setAttribute("username", username);
-            
+        
         try {                               
             request.getRequestDispatcher("viewPosts.jsp").forward(request, response);
         } catch (ServletException ex) {

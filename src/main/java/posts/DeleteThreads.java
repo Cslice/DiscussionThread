@@ -6,6 +6,7 @@
 
 package posts;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -14,13 +15,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import login.FileIO;
 
 /**
  *
  * @author cameronthomas
  */
-@WebServlet(name = "ViewPostsPage", urlPatterns = {"/ViewPostsPage"})
-public class ViewPostsPage extends HttpServlet {
+@WebServlet(name = "DeleteThreads", urlPatterns = {"/DeleteThreads"})
+public class DeleteThreads extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +41,10 @@ public class ViewPostsPage extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CreatePostsPage</title>");            
+            out.println("<title>Servlet DeleteThreads</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CreatePostsPage at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteThreads at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,7 +62,25 @@ public class ViewPostsPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        new CreatePostsPage().createPostPage(request, response);
+        String threadName = "";
+        Object fileObj = null;
+        File fileToDelete = null;
+        
+         ArrayList<ArrayList<String>> threadList = new GetThreadsAndPosts().getThreadsArray("threads");
+         
+         // Delete post files
+         for(ArrayList<String>thread: threadList)
+         {
+             if(new FileIO().readFile(thread.get(0) + ".json") != null)
+                new FileIO().deleteFile(thread.get(0) + ".json");             
+         }
+         
+         // Delete threads file
+         if(new FileIO().readFile("threads.json") != null)
+                new FileIO().deleteFile("threads.json");
+         
+         
+         new CreateThreadPage().createThreadPage(request, response);
     }
 
     /**

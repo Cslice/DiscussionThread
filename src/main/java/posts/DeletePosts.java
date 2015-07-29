@@ -8,19 +8,19 @@ package posts;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import login.FileIO;
 
 /**
  *
  * @author cameronthomas
  */
-@WebServlet(name = "ViewPostsPage", urlPatterns = {"/ViewPostsPage"})
-public class ViewPostsPage extends HttpServlet {
+@WebServlet(name = "DeletePosts", urlPatterns = {"/DeletePosts"})
+public class DeletePosts extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +39,10 @@ public class ViewPostsPage extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CreatePostsPage</title>");            
+            out.println("<title>Servlet DeletePosts</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CreatePostsPage at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeletePosts at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,6 +60,13 @@ public class ViewPostsPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String threadName = request.getParameter("threadName");
+        
+        // Delete threads file
+        if(new FileIO().readFile(threadName + ".json") != null)
+            new FileIO().deleteFile(threadName + ".json");
+        
+        // Redirect to posts page
         new CreatePostsPage().createPostPage(request, response);
     }
 

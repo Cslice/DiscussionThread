@@ -64,6 +64,7 @@
 <!--        <div class="list-group">
             <a href="CreateThreadsPage?threadName=test" class="list-group-item">Test</a>
         </div>-->
+        ${noThreadsLabel}
         <c:forEach var="thread" items="${threadList}">       
                 <a href="ViewPostsPage?threadName=${thread[0]}&username=${username}" class="list-group-item">
                    <h4>${thread[0]}</h4> 
@@ -83,6 +84,9 @@
                 <button type="submit" class="btn btn-primary">Add Thread</button>
                 <!--<button type="button" class="btn btn-danger">Delete All Threads</button>-->
             </form>
+                <br />
+            ${deleteButton}
+            
         </div>
       </div>
     </div> <!-- /container -->

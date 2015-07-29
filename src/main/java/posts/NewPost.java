@@ -32,8 +32,6 @@ public class NewPost {
         tempArrayList.add(author);
         tempArrayList.add(dateFormat.format(date)); 
         
-        //System.out.println(threadName);
-        
         if(new FileIO().readFile(threadName + ".json") != null)
         {
             postList = new GetThreadsAndPosts().getPostArray(threadName);
@@ -44,9 +42,7 @@ public class NewPost {
         
         // Add new post to list
         postList.add(0, tempArrayList);
-        
-      //  System.out.println(postList.toString());
-        
+
         // Convert post array list to JSON object
         finalJsonObj = this.convertArrayListToJSON(postList);
         
@@ -77,9 +73,7 @@ public class NewPost {
         
         // Nest threads array in threads element
         finalJsonObj.put("posts", tempJsonArray);
-        
-        //System.out.println(finalJsonObj.toString());
-        
+ 
         return finalJsonObj;
     }  
 }

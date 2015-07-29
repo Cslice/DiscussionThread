@@ -62,6 +62,8 @@
       <div class="jumbotron">
         <h1>${threadName}</h1>
         
+        ${noPostsLabel}
+        
         <c:forEach var="post" items="${postList}">       
                 <span class="list-group-item">
                    <h4>${post[1]}</h4> 
@@ -82,6 +84,8 @@
                 <button type="submit" class="btn btn-primary">Add Post</button>
                 <!--<button type="button" class="btn btn-danger">Delete All Threads</button>-->
             </form>
+                    <br />
+            ${deleteButton}
         </div>
       </div>
 <a class="navbar-brand" href="ViewThreadsPage?username=${username}">Discussion Board Home</a>

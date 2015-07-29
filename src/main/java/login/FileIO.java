@@ -70,5 +70,19 @@ public class FileIO {
             objectFile = null;
         
         return objectFile;
-    }   
+    }
+    
+    public void deleteFile(String fileName)
+    {
+        File fileToDelete = null;
+        
+         //Test to see if we are in the openshift enviroment
+        if(System.getenv("OPENSHIFT_DATA_DIR") != null)
+        {
+            fileName = System.getenv("OPENSHIFT_DATA_DIR") + fileName;
+        }
+        
+        fileToDelete = new File(fileName);
+        fileToDelete.delete();
+    }
 }

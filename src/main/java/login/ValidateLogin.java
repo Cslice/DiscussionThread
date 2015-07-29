@@ -17,12 +17,6 @@ public class ValidateLogin {
     public boolean validate(String username, String password) 
     {
         boolean validLogin = false;
-        
-        // Write user file to data directory on openshift
-        String data = "{'users':[{'username':'cameron', 'password':'thomas'},{'username':'sburton', 'password':'securepassword'}]}";
-        data = data.replaceAll("'", "\"");
-   
-        new FileIO().writeFile("userData.json", data);
  
         Object obj = new FileIO().readFile("userData.json");
         JSONObject jsonObject = (JSONObject) obj;
