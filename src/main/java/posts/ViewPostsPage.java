@@ -9,20 +9,18 @@ package posts;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import login.FileIO;
 
 /**
  *
  * @author cameronthomas
  */
-@WebServlet(name = "CreateThreadsPage", urlPatterns = {"/CreateThreadsPage"})
-public class CreateThreadsPage extends HttpServlet {
+@WebServlet(name = "ViewPostsPage", urlPatterns = {"/ViewPostsPage"})
+public class ViewPostsPage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +39,10 @@ public class CreateThreadsPage extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CreateThreadsPage</title>");            
+            out.println("<title>Servlet CreatePostsPage</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CreateThreadsPage at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CreatePostsPage at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,15 +59,17 @@ public class CreateThreadsPage extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {   
-        ArrayList<ArrayList<String>> threadList = new GetThreadsAndPosts().getThreadsArray("test");
-        
-         //processRequest(request, response);
-        // request.setAttribute("threadList", threadList);
-        
-         request.getRequestDispatcher("discussionBoardHomepage.jsp").forward(request, response); 
-                     
-
+            throws ServletException, IOException {
+//        String threadName = request.getParameter("threadName");
+//        String username = request.getParameter("username");
+//        
+//        ArrayList<ArrayList<String>> postList = new GetThreadsAndPosts().getPostArray(threadName);
+//   
+//        request.setAttribute("threadName", threadName);
+//        request.setAttribute("postList", postList);
+//        request.setAttribute("username", username);
+//        request.getRequestDispatcher("viewPosts.jsp").forward(request, response); 
+        new CreatePostsPage().createPostPage(request, response);
     }
 
     /**

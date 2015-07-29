@@ -42,14 +42,8 @@
     <!-- Static navbar -->
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-            <a class="navbar-brand" href="#">Discussion Board Home</a>
+        <div>         
+            <label class="navbar-brand">Discussion Board</label>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           
@@ -66,31 +60,31 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Discussion Name</h1>
-        <div class="list-group">
+        <h1>Discussion Threads</h1>
+<!--        <div class="list-group">
             <a href="CreateThreadsPage?threadName=test" class="list-group-item">Test</a>
-        </div>
-        
-        <c:forEach var="thread" items="${threadList}">
-            
-                <a href="http://www.espn.com" class="list-group-item">
-                    <strong>${thread[0]} ${thread[1]} ${thread[2]} ${thread[3]}</strong>
+        </div>-->
+        <c:forEach var="thread" items="${threadList}">       
+                <a href="ViewPostsPage?threadName=${thread[0]}&username=${username}" class="list-group-item">
+                   <h4>${thread[0]}</h4> 
+                            ${thread[1]} <br />
+                            ${thread[2]}
                 </a>
-            
         </c:forEach>
-        
+        <%--<c:out value="${username}"/>--%>
+<!--        <h3 visibility="${threadListStatus}">There are no current threads</h3>-->
         <br />
         <div class="form-group">
-            <form>
+            <form method="POST" action="CreateThread">
                 <h3 for="usr">Add a new thread</h3>
-                <input type="text" class="form-control" id="usr" placeholder="Enter name of new thread">
+                <input type="text" class="form-control" name="threadName" placeholder="Enter name of new thread"/>
+                <input type="hidden" name="username" value="${username}"/>
                 <br />
-                <button type="button" class="btn btn-primary">Add Thread</button>
-
+                <button type="submit" class="btn btn-primary">Add Thread</button>
+                <!--<button type="button" class="btn btn-danger">Delete All Threads</button>-->
             </form>
         </div>
       </div>
-
     </div> <!-- /container -->
 
 

@@ -8,7 +8,6 @@ package posts;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author cameronthomas
  */
-@WebServlet(name = "CreatePost", urlPatterns = {"/CreatePost"})
-public class CreatePost extends HttpServlet {
+@WebServlet(name = "ViewThreadsPage", urlPatterns = {"/ViewThreadsPage"})
+public class ViewThreadsPage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +38,10 @@ public class CreatePost extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CreatePost</title>");            
+            out.println("<title>Servlet ViewThreadsPage</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CreatePost at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ViewThreadsPage at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,7 +58,8 @@ public class CreatePost extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {      
+            throws ServletException, IOException {
+        new CreateThreadPage().createThreadPage(request, response);
     }
 
     /**
@@ -73,12 +73,7 @@ public class CreatePost extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String threadName = request.getParameter("threadName");
-        String username = request.getParameter("username");
-        String postData = request.getParameter("postData");
-        
-        new NewPost().addPost(threadName, postData, username);
-        new CreatePostsPage().createPostPage(request, response);
+        processRequest(request, response);
     }
 
     /**

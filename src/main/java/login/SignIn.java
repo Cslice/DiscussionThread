@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import posts.GetThreadsAndPosts;
+import posts.CreateThreadPage;
 
 /**
  *
@@ -78,24 +79,14 @@ public class SignIn extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {            
-        ValidateLogin temp = new ValidateLogin();
-
-        String username = request.getParameter("inputUsername");
-        String password = request.getParameter("inputPassword");
+        ValidateLogin validateLogin = new ValidateLogin();
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
           
-        if(temp.validate(username, password))
-        {
-            GetThreadsAndPosts temp1 = new GetThreadsAndPosts();
-            
-            ArrayList<ArrayList<String>> threadList = temp1.getThreadsArray("test");
-            
-            request.setAttribute("threadList", threadList);
-            request.getRequestDispatcher("discussionBoardHomepage.jsp").forward(request, response);       
-        }
+        if(validateLogin.validate(username, password))
+            new CreateThreadPage().createThreadPage(request, response);
         else
-        {     
             response.sendRedirect("invalidLogin.html");
-        }
     }
 
     /**

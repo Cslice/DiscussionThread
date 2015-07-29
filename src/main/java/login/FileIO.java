@@ -7,6 +7,7 @@
 package login;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -29,7 +30,7 @@ public class FileIO {
         //Test to see if we are in the openshift enviroment
         if(System.getenv("OPENSHIFT_DATA_DIR") != null)
         {
-            fileName = System.getenv("OPENSHIFT_DATA_DIR") + "userData.json";
+            fileName = System.getenv("OPENSHIFT_DATA_DIR") + fileName;
         }
                      
         try {
@@ -51,17 +52,22 @@ public class FileIO {
         //Test to see if we are in the openshift enviroment
         if(System.getenv("OPENSHIFT_DATA_DIR") != null)
         {
-            fileName = System.getenv("OPENSHIFT_DATA_DIR") + "userData.json";
+            fileName = System.getenv("OPENSHIFT_DATA_DIR") + fileName;
         }
         
-        try {
-            objectFile = parser.parse(new FileReader(fileName));
-                  
-        } catch (IOException ex) {
-            Logger.getLogger(FileIO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(FileIO.class.getName()).log(Level.SEVERE, null, ex);
+        if(new File(fileName).exists())
+        {
+            try {
+                objectFile = parser.parse(new FileReader(fileName));
+
+            } catch (IOException ex) {
+                Logger.getLogger(FileIO.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(FileIO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        else
+            objectFile = null;
         
         return objectFile;
     }   
