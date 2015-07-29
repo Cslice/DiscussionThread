@@ -35,6 +35,24 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   
+    <script type="text/javascript">
+        function validateThreadName()
+        {
+           var validThreadName = true;
+           var threadName = $("#threadNameTextbox").val()
+            
+            // Check if text box is empty or is just spaces
+            if (threadName===null || threadName.trim()==="" 
+                    || threadName === undefined) {    
+                validThreadName = false;
+            }
+            
+            return validThreadName;
+        }
+    </script>
   </head>
 
   <body>
@@ -76,9 +94,9 @@
 <!--        <h3 visibility="${threadListStatus}">There are no current threads</h3>-->
         <br />
         <div class="form-group">
-            <form method="POST" action="CreateThread">
+            <form method="POST" onsubmit="return validateThreadName()"  action="CreateThread">
                 <h3 for="usr">Add a new thread</h3>
-                <input type="text" class="form-control" name="threadName" placeholder="Enter name of new thread"/>
+                <input type="text" class="form-control" id="threadNameTextbox" name="threadName" placeholder="Enter name of new thread"/>
                 <input type="hidden" name="username" value="${username}"/>
                 <br />
                 <button type="submit" class="btn btn-primary">Add Thread</button>
