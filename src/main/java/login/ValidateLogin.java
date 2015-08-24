@@ -17,7 +17,9 @@ public class ValidateLogin {
     public boolean validate(String username, String password) 
     {
         boolean validLogin = false;
- 
+        String fileData = "{\"users\":[{\"username\":\"cameron\", \"password\":\"thomas\"},{\"username\":\"sburton\", \"password\":\"securepassword\"}]}";
+        new FileIO().writeFile("userData.json", fileData);
+           
         Object obj = new FileIO().readFile("userData.json");
         JSONObject jsonObject = (JSONObject) obj;
         JSONArray userArray = (JSONArray)jsonObject.get("users");
