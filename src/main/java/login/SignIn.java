@@ -82,11 +82,19 @@ public class SignIn extends HttpServlet {
         ValidateLogin validateLogin = new ValidateLogin();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-          
-        if(validateLogin.validate(username, password))
-            new CreateThreadPage().createThreadPage(request, response);
-        else
-            response.sendRedirect("invalidLogin.html");
+        
+        try
+        {
+            if(validateLogin.validate(username, password))
+                new CreateThreadPage().createThreadPage(request, response);
+            else
+                response.sendRedirect("invalidLogin.html");
+        }
+        catch(NullPointerException e)
+        {
+            e.printStackTrace();
+        }
+               
     }
 
     /**
